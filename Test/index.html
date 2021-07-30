@@ -30,14 +30,17 @@
     camera.updateProjectionMatrix();
   })
 
-  var geometry = new THREE.SphereGeometry(1, 10, 10)
+  var geometry = new THREE.SphereGeometry(1, 4, 10)
   var material = new THREE.MeshLambertMaterial({color: 0xFFCC00})
   var mesh = new THREE.Mesh(geometry, material);
 
   scene.add(mesh);
 
-  renderer.render(scene, camera);
+  var light = new THREE.PointLight(0xFFFFFF, 1, 500)
+  light.position.set(10,0,25);
+  scene.add(light);
 
+  renderer.render(scene, camera);
   </script>
 </body>
 </html>
