@@ -3,6 +3,10 @@ body {
   height: 100vh;
 }
 
+<<<<<<< HEAD
 canvas {
+=======
+canvas{
+>>>>>>> ec7d718e51d66cb8fd3b4bcb15a778f6be5e02d0
   display: block;
 }
