@@ -1,12 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
+
 body {
   margin: 0;
   height: 100vh;
 }
 
-<<<<<<< HEAD
 canvas {
-=======
-canvas{
->>>>>>> ec7d718e51d66cb8fd3b4bcb15a778f6be5e02d0
   display: block;
+}
+
+h1 {
+  position: absolute;
+  top: 2em;
+  left: 2em;
+  font-family: 'Montserrat';
+  font-size: 5em;
+  text-transform: uppercase;
+  width: auto;
+  line-height: .8em;
+  border: 5px solid black;
+  padding: .2em;
 }
