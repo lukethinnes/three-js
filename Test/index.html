@@ -30,29 +30,58 @@
     camera.updateProjectionMatrix();
   })
 
+  var raycaster = new THREE.Raycaster()
+  var mouse = new THREE.Vector2()
+
   var geometry = new THREE.BoxGeometry(1, 1, 1)
-  var material = new THREE.MeshLambertMaterial({color: 0xFFCC00})
-  var mesh = new THREE.Mesh(geometry, material);
+  var material = new THREE.MeshLambertMaterial({color: 0xf7f7f7})
 
-  mesh.rotation.set(2, 2, -2);
-
-  scene.add(mesh);
+  meshX = -20;
+  for(let i = 0; i<15; i++) {
+    var mesh = new THREE.Mesh(geometry, material);
+    mesh.position.x = (Math.random() - 0.5) * 10;
+    mesh.position.y = (Math.random() - 0.5) * 10;
+    mesh.position.z = (Math.random() - 0.5) * 10;
+    scene.add(mesh);
+    meshX+=1;
+  }
 
   var light = new THREE.PointLight(0xFFFFFF, 1, 500)
-  light.position.set(10,0,25);
+  light.position.set(0,0,0);
+  scene.add(light);
+
+
+  var light = new THREE.PointLight(0xFFFFFF, 1, 500)
+  light.position.set(0,0,25);
   scene.add(light);
 
   var render = function() {
     requestAnimationFrame(render);
 
-    mesh.rotation.x += 0.05;
-    mesh.rotation.y += 0.03;
-
     renderer.render(scene, camera);
   }
 
+  function onMouseMove(event) {
+    event.preventDefault()
+
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1
+    mouse.y = - (event.clientY / window.innerHeight) * 2 + 1
+    raycaster.setFromCamera(mouse, camera);
+
+    var intersects = raycaster.intersectObjects(scene.children, true);
+    for (var i = 0; i < intersects.length; i++) {
+        this.tl = new TimelineMax()
+        this.tl.to(intersects[i].object.scale, 1, {x: 2, ease: Expo.easeOut})
+        this.tl.to(intersects[i].object.scale, 0.5, {x: 2, ease: Expo.easeOut})
+        this.tl.to(intersects[i].object.position, 1, {x: 2, ease: Expo.easeOut})
+        this.tl.to(intersects[i].object.rotation, 1, {y: Math.PI*.5, ease: Expo.easeOut}, '=-1.5')
+        intersects[i].object.material.color.set(0xb7b7b7)
+      }
+    }
+
   render();
 
+  window.addEventListener('mousemove', onMouseMove) 
   </script>
 </body>
 </html>
